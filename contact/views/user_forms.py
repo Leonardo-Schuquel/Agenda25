@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 
 
 def register(request):
+    # Register a new user
     form = RegisterForm()
 
     if request.method == 'POST':
@@ -25,7 +26,7 @@ def register(request):
 
 
 def login_view(request):
-
+    # responsible for user login
     form = AuthenticationForm(request)
 
     if request.method == 'POST':
@@ -50,6 +51,7 @@ def login_view(request):
 
 @login_required(login_url='contact:login')
 def logout_view(request):
+    # Responsible for logging out the user
     auth.logout(request)
 
     return redirect('contact:login')
@@ -57,6 +59,7 @@ def logout_view(request):
 
 @login_required(login_url='contact:login')
 def user_update(request):
+    # Editing user data
     form = RegisterUpdateForm(instance=request.user)
 
     if request.method != 'POST':

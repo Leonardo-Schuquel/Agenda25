@@ -9,6 +9,7 @@ from django.contrib.auth.decorators import login_required
 
 @login_required(login_url='contact:login')
 def create(request):
+    # Responsible for creating a new contact
     form_action = reverse('contact:create')
 
     if request.method == 'POST':
@@ -45,6 +46,7 @@ def create(request):
 
 @login_required(login_url='contact:login')
 def update(request, contact_id):
+    # updates existing contacts
     contact = get_object_or_404(
         Contact, pk=contact_id, show=True, owner=request.user)
     form_action = reverse('contact:update', args=(contact_id,))
@@ -81,6 +83,7 @@ def update(request, contact_id):
 
 @login_required(login_url='contact:login')
 def delete(request, contact_id):
+    # Deletes a contact from the database
     contact = get_object_or_404(
         Contact, pk=contact_id, show=True, owner=request.user
     )
